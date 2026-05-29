@@ -1,0 +1,30 @@
+КАРТОЧКА КАЧЕСТВА ГЕОДАННЫХ
+========================================
+Входных ДТП (2022-2024):      24553
+Валидных координат:           24552  (100.0%)
+Получили H3-индекс:           24552  (100.0%)
+Обогащены OSM-данными:        23052  (93.9% от валидных)
+
+ПОКРЫТИЕ ТЕКСТОВЫХ ПРИЗНАКОВ (% ДТП)
+----------------------------------------
+  has_traffic_light                   12.1%
+  has_crosswalk                       0.0%
+  has_bus_stop                        35.9%
+  is_intersection                     32.6%
+  has_camera                          0.0%
+  has_bridge                          11.1%
+  has_school_nearby                   6.0%
+  is_open_road                        33.9%
+
+ПОКРЫТИЕ OSM-ПРИЗНАКОВ (ПО ТЗ)
+----------------------------------------
+  distance_to_intersection_m          93.9%
+  distance_to_crosswalk_m             0.0%
+  distance_to_bus_stop_m              93.9%
+  poi_count_100m                      93.9%
+  poi_count_300m                      93.9%
+  crossing_density                    93.9%
+  stop_density                        93.9%
+  speed_limit                         93.9%
+  road_class                          94.7%
+  landuse_type                        94.6%
