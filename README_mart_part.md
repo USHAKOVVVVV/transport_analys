@@ -27,7 +27,7 @@ transport_analys/
 │   ├── fact_participant.csv             # 98 402 строки
 │   ├── fact_vehicle.csv                 # 71 589 строк
 │   ├── data_dictionary.xlsx             # Словарь полей
-│   └── coverage_report.txt             # Отчёт покрытия
+│   └── coverage_report.txt              # Отчёт покрытия
 │
 ├── output_w/                            # Погодные признаки (Студент 2)
 │   └── feat_weather_dtp_first4600lines.csv  # Покрытие ~11% (4 600 строк)
@@ -37,7 +37,7 @@ transport_analys/
 │   ├── feat_spatial_dtp.csv             # Покрытие ~60% (24 552 строки)
 │   ├── agg_cell_space.csv               # Агрегаты по H3-ячейкам
 │   ├── osm_cell_cache.json              # Кэш OSM-запросов
-│   ├── coverage_report.txt             # Отчёт покрытия
+│   ├── coverage_report.txt              # Отчёт покрытия
 │   └── README.md                        # Описание методики геообогащения
 │
 ├── output_mart/                         # Финальные витрины (Студент 4)
@@ -45,6 +45,10 @@ transport_analys/
 │   ├── mart_factor_profile.csv          # Флаги факторов риска для DataLens
 │   ├── mart_dashboard_overview.csv      # Агрегаты по году/месяцу/округу
 │   ├── mart_time_dynamics.csv           # Временная динамика
+│   ├── mart_spatial_risk.csv            # Агрегаты по H3-ячейкам для карты
+│   ├── mart_weather_context.csv         # Погодные агрегаты по сезонам
+│   ├── mart_cell_day.csv                # Детализация по ячейке + день недели
+│   ├── mart_cell_hour.csv               # Детализация по ячейке + час
 │   ├── feature_importance.csv           # Важность признаков (ML)
 │   └── factor_dictionary.xlsx           # Паспорт всех признаков
 │
@@ -76,6 +80,10 @@ transport_analys/
 | `mart_factor_profile.csv` | 41 131 | Флаги факторов в формате "Да"/"Нет" для DataLens |
 | `mart_dashboard_overview.csv` | 8 011 | Агрегаты по году/месяцу/округу/типу ДТП |
 | `mart_time_dynamics.csv` | 560 | Временная динамика с долями нарушений |
+| `mart_spatial_risk.csv` | 4 913 | Агрегаты по H3-ячейкам — для карты рисков |
+| `mart_weather_context.csv` | 61 | Погодные агрегаты по годам и сезонам |
+| `mart_cell_day.csv` | 23 582 | Детализация рисков по ячейке + день недели |
+| `mart_cell_hour.csv` | 20 547 | Детализация рисков по ячейке + час |
 | `feature_importance.csv` | 30 | Важность признаков из Random Forest |
 
 ---
@@ -111,17 +119,3 @@ risk_score = (
     has_speed_violation    × 0.068
 ) → нормировано в [0, 1]
 ```
-
----
-
-## Известные ограничения
-
-| Проблема | Влияние | Статус |
-|---|---|---|
-| Погода покрывает 11% ДТП | temp_c, ice_risk заполнены медианой для ML | ⚠ Студент 2 пересчитывает на полный массив |
-| Spatial покрытие 60% | Гео-признаки отсутствуют для 40% ДТП | ⚠ Студент 3 дорабатывает |
-| has_alcohol_violation = 0 | Алкоголь не определён из поля нарушений | ⚠ Требует проверки кодировки |
-| distance_to_crosswalk_m = 100% NaN | Не используется в модели | ⚠ Студент 3 не заполнил поле |
-| Дисбаланс классов 96% / 4% | Precision для гибели = 0.10 | ✓ Учтён через class_weight=balanced |
-
----
